@@ -1,19 +1,19 @@
 [workspace]
 exclude = [ "bin/utils/moonkey" ]
 members = [
-	"bin/utils/moonkey",
-	"client/rpc/finality",
-	"client/rpc/manual-xcm",
-	"node",
 	"node/cli",
-	"node/service",
-	"pallets/maintenance-mode",
-	"pallets/migrations",
-	"pallets/proxy-genesis-companion",
-	"precompiles/utils/macro",
-	"runtime/moonbase",
-	"runtime/moonbeam",
-	"runtime/moonriver",
+	# "bin/utils/moonkey",
+	# "client/rpc/finality",
+	# "client/rpc/manual-xcm",
+	# "node",
+	# "node/service",
+	# "pallets/maintenance-mode",
+	# "pallets/migrations",
+	# "pallets/proxy-genesis-companion",
+	# "precompiles/utils/macro",
+	# "runtime/moonbase",
+	# "runtime/moonbeam",
+	# "runtime/moonriver",
 ]
 
 [patch.crates-io]
