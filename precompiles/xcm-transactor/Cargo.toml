@@ -55,7 +55,7 @@ xcm-builder = { git = "https://github.com/paritytech/polkadot", branch = "polkad
 xcm-executor = { git = "https://github.com/paritytech/polkadot", branch = "polkadot-v0.9.30" }
 
 # ORML
-orml-traits = { git = "https://github.com/purestake/open-runtime-module-library", branch = "polkadot-v0.9.30" }
+orml-traits = { git = "https://github.com/open-web3-stack/open-runtime-module-library", branch = "polkadot-v0.9.30" }
 
 [features]
 default = [ "std" ]

@@ -26,7 +26,7 @@ frame-system = { git = "https://github.com/paritytech/substrate", branch = "polk
 pallet-evm = { git = "https://github.com/paritytech/frontier", branch = "polkadot-v0.9.30", default-features = false, features = [ "forbid-evm-reentrancy" ] }
 
 # Polkadot / XCM
-orml-xtokens = { git = "https://github.com/purestake/open-runtime-module-library", branch = "polkadot-v0.9.30", default-features = false }
+orml-xtokens = { git = "https://github.com/open-web3-stack/open-runtime-module-library", branch = "polkadot-v0.9.30", default-features = false }
 xcm = { git = "https://github.com/paritytech/polkadot", branch = "polkadot-v0.9.30", default-features = false }
 
 [dev-dependencies]
@@ -48,7 +48,7 @@ sp-io = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0
 cumulus-primitives-core = { git = "https://github.com/paritytech/cumulus", branch = "polkadot-v0.9.30" }
 
 # Polkadot
-orml-traits = { git = "https://github.com/purestake/open-runtime-module-library", branch = "polkadot-v0.9.30" }
+orml-traits = { git = "https://github.com/open-web3-stack/open-runtime-module-library", branch = "polkadot-v0.9.30" }
 pallet-xcm = { git = "https://github.com/paritytech/polkadot", branch = "polkadot-v0.9.30" }
 xcm-builder = { git = "https://github.com/paritytech/polkadot", branch = "polkadot-v0.9.30" }
 xcm-executor = { git = "https://github.com/paritytech/polkadot", branch = "polkadot-v0.9.30" }
