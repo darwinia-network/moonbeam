@@ -4,7 +4,7 @@ authors = [ "PureStake" ]
 edition = "2021"
 homepage = "https://moonbeam.network"
 license = "GPL-3.0-only"
-repository = "https://github.com/PureStake/moonbeam/"
+repository = "https://github.com/paritytech/moonbeam/"
 version = "0.1.0"
 
 [dependencies]
@@ -20,14 +20,14 @@ moonbeam-rpc-core-types = { path = "../../rpc-core/types" }
 moonbeam-rpc-primitives-debug = { path = "../../../primitives/rpc/debug" }
 
 # Substrate
-sc-client-api = { git = "https://github.com/purestake/substrate", branch = "moonbeam-polkadot-v0.9.32" }
-sc-utils = { git = "https://github.com/purestake/substrate", branch = "moonbeam-polkadot-v0.9.32" }
-sp-api = { git = "https://github.com/purestake/substrate", branch = "moonbeam-polkadot-v0.9.32" }
-sp-block-builder = { git = "https://github.com/purestake/substrate", branch = "moonbeam-polkadot-v0.9.32" }
-sp-blockchain = { git = "https://github.com/purestake/substrate", branch = "moonbeam-polkadot-v0.9.32" }
-sp-core = { git = "https://github.com/purestake/substrate", branch = "moonbeam-polkadot-v0.9.32" }
-sp-io = { git = "https://github.com/purestake/substrate", branch = "moonbeam-polkadot-v0.9.32" }
-sp-runtime = { git = "https://github.com/purestake/substrate", branch = "moonbeam-polkadot-v0.9.32" }
+sc-client-api = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.33" }
+sc-utils = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.33" }
+sp-api = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.33" }
+sp-block-builder = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.33" }
+sp-blockchain = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.33" }
+sp-core = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.33" }
+sp-io = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.33" }
+sp-runtime = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.33" }
 
 # Frontier
 ethereum = { version = "0.14.0", default-features = false, features = [ "with-codec" ] }
