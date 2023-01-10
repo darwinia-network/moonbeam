@@ -32,7 +32,7 @@ sp-runtime = { git = "https://github.com/paritytech/substrate", branch = "polkad
 # Frontier
 ethereum = { version = "0.14.0", default-features = false, features = [ "with-codec" ] }
 ethereum-types = "0.14"
-fc-consensus = { git = "https://github.com/purestake/frontier", branch = "moonbeam-polkadot-v0.9.32" }
-fc-db = { git = "https://github.com/purestake/frontier", branch = "moonbeam-polkadot-v0.9.32" }
-fc-rpc = { git = "https://github.com/purestake/frontier", branch = "moonbeam-polkadot-v0.9.32", features = [ "rpc_binary_search_estimate" ] }
-fp-rpc = { git = "https://github.com/purestake/frontier", branch = "moonbeam-polkadot-v0.9.32" }
+fc-consensus = { git = "https://github.com/darwinia-network/frontier", branch = "prepare-polkadot-v0.9.33" }
+fc-db = { git = "https://github.com/darwinia-network/frontier", branch = "prepare-polkadot-v0.9.33" }
+fc-rpc = { git = "https://github.com/darwinia-network/frontier", branch = "prepare-polkadot-v0.9.33", features = [ "rpc_binary_search_estimate" ] }
+fp-rpc = { git = "https://github.com/darwinia-network/frontier", branch = "prepare-polkadot-v0.9.33" }
