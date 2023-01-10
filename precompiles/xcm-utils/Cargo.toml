@@ -51,7 +51,7 @@ polkadot-parachain = { git = "https://github.com/paritytech/polkadot", branch = 
 xcm-builder = { git = "https://github.com/paritytech/polkadot", branch = "release-v0.9.33" }
 
 # ORML
-orml-traits = { git = "https://github.com/purestake/open-runtime-module-library", branch = "moonbeam-polkadot-v0.9.32" }
+orml-traits = { git = "https://github.com/open-web3-stack/open-runtime-module-library", branch = "polkadot-v0.9.33" }
 
 [features]
 default = [ "std" ]
