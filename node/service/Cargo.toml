@@ -92,15 +92,15 @@ substrate-frame-rpc-system = { git = "https://github.com/paritytech/substrate", 
 substrate-prometheus-endpoint = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.33" }
 
 # Frontier
-fc-consensus = { git = "https://github.com/darwinia-network/frontier", branch = "prepare-polkadot-v0.9.33" }
-fc-db = { git = "https://github.com/darwinia-network/frontier", branch = "prepare-polkadot-v0.9.33" }
-fc-mapping-sync = { git = "https://github.com/darwinia-network/frontier", branch = "prepare-polkadot-v0.9.33" }
-fc-rpc = { git = "https://github.com/darwinia-network/frontier", branch = "prepare-polkadot-v0.9.33", features = [ "rpc_binary_search_estimate" ] }
-fc-rpc-core = { git = "https://github.com/darwinia-network/frontier", branch = "prepare-polkadot-v0.9.33" }
-fp-consensus = { git = "https://github.com/darwinia-network/frontier", branch = "prepare-polkadot-v0.9.33" }
-fp-rpc = { git = "https://github.com/darwinia-network/frontier", branch = "prepare-polkadot-v0.9.33" }
-fp-storage = { git = "https://github.com/darwinia-network/frontier", branch = "prepare-polkadot-v0.9.33" }
-pallet-ethereum = { git = "https://github.com/darwinia-network/frontier", branch = "prepare-polkadot-v0.9.33", features = [ "forbid-evm-reentrancy" ] }
+fc-consensus = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.33" }
+fc-db = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.33" }
+fc-mapping-sync = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.33" }
+fc-rpc = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.33", features = [ "rpc_binary_search_estimate" ] }
+fc-rpc-core = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.33" }
+fp-consensus = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.33" }
+fp-rpc = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.33" }
+fp-storage = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.33" }
+pallet-ethereum = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.33", features = [ "forbid-evm-reentrancy" ] }
 
 # Cumulus / Nimbus
 cumulus-client-cli = { git = "https://github.com/paritytech/cumulus", branch = "polkadot-v0.9.33" }
