@@ -36,7 +36,7 @@ sp-std = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v
 sp-transaction-pool = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36" }
 
 # Frontier
-fc-consensus = { git = "https://github.com/purestake/frontier", branch = "moonbeam-polkadot-v0.9.32" }
-fc-rpc = { git = "https://github.com/purestake/frontier", branch = "moonbeam-polkadot-v0.9.32", features = [ "rpc_binary_search_estimate" ] }
-fc-rpc-core = { git = "https://github.com/purestake/frontier", branch = "moonbeam-polkadot-v0.9.32" }
-fp-rpc = { git = "https://github.com/purestake/frontier", branch = "moonbeam-polkadot-v0.9.32" }
+fc-consensus = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.36" }
+fc-rpc = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.36", features = [ "rpc_binary_search_estimate" ] }
+fc-rpc-core = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.36" }
+fp-rpc = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.36" }
