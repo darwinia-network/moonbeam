@@ -1,6 +1,6 @@
 [package]
 name = "pallet-evm-precompile-author-mapping"
-authors = [ "PureStake" ]
+authors = ["PureStake"]
 description = "A Precompile to make pallet-author-mapping accessible to pallet-evm"
 edition = "2021"
 version = "0.2.0"
@@ -23,7 +23,9 @@ sp-std = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v
 
 # Frontier
 fp-evm = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.36", default-features = false }
-pallet-evm = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.36", default-features = false, features = [ "forbid-evm-reentrancy" ] }
+pallet-evm = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.36", default-features = false, features = [
+	"forbid-evm-reentrancy",
+] }
 
 # Nimbus
 nimbus-primitives = { git = "https://github.com/purestake/nimbus", branch = "moonbeam-polkadot-v0.9.32", default-features = false }
@@ -35,17 +37,19 @@ serde = "1.0.100"
 
 # Moonbeam
 pallet-author-mapping = { path = "../../pallets/author-mapping" }
-precompile-utils = { path = "../utils", features = [ "testing" ] }
+precompile-utils = { path = "../utils", features = ["testing"] }
 
 # Substrate
 pallet-balances = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36" }
 pallet-scheduler = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36" }
 pallet-timestamp = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36" }
-scale-info = { version = "2.0", default-features = false, features = [ "derive" ] }
+scale-info = { version = "2.0", default-features = false, features = [
+	"derive",
+] }
 sp-runtime = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36" }
 
 [features]
-default = [ "std" ]
+default = ["std"]
 std = [
 	"codec/std",
 	"fp-evm/std",

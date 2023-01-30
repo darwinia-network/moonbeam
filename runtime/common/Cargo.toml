@@ -1,6 +1,6 @@
 [package]
 name = "moonbeam-runtime-common"
-authors = [ "PureStake" ]
+authors = ["PureStake"]
 description = "Common code shared between runtimes"
 edition = "2021"
 homepage = "https://moonbeam.network"
@@ -33,7 +33,9 @@ sp-std = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v
 
 # Frontier
 pallet-base-fee = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.36", default-features = false }
-pallet-evm = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.36", default-features = false, features = [ "forbid-evm-reentrancy" ] }
+pallet-evm = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.36", default-features = false, features = [
+	"forbid-evm-reentrancy",
+] }
 
 # Nimbus
 pallet-author-inherent = { git = "https://github.com/purestake/nimbus", branch = "moonbeam-polkadot-v0.9.32", default-features = false }
@@ -60,7 +62,4 @@ std = [
 	"sp-std/std",
 	"xcm/std",
 ]
-try-runtime = [
-	"frame-support/try-runtime",
-	"pallet-migrations/try-runtime",
-]
+try-runtime = ["frame-support/try-runtime", "pallet-migrations/try-runtime"]

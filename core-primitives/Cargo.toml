@@ -1,6 +1,6 @@
 [package]
 name = "moonbeam-core-primitives"
-authors = [ "PureStake" ]
+authors = ["PureStake"]
 edition = "2021"
 homepage = "https://moonbeam.network"
 license = "GPL-3.0-only"
@@ -15,10 +15,5 @@ sp-core = { git = "https://github.com/paritytech/substrate", branch = "polkadot-
 sp-runtime = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", default-features = false }
 
 [features]
-default = [ "std" ]
-std = [
-	"account/std",
-	"fp-self-contained/std",
-	"sp-core/std",
-	"sp-runtime/std",
-]
+default = ["std"]
+std = ["account/std", "fp-self-contained/std", "sp-core/std", "sp-runtime/std"]

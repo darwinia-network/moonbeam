@@ -1,6 +1,6 @@
 [package]
 name = "pallet-ethereum-xcm"
-authors = [ "Parity Technologies <admin@parity.io>" ]
+authors = ["Parity Technologies <admin@parity.io>"]
 description = "Xcm Transact compatibility for pallet-etherum."
 edition = "2021"
 license = "Apache-2.0"
@@ -8,17 +8,21 @@ repository = "https://github.com/paritytech/frontier/"
 version = "1.0.0-dev"
 
 [package.metadata.docs.rs]
-targets = [ "x86_64-unknown-linux-gnu" ]
+targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
-ethereum = { version = "0.14.0", default-features = false, features = [ "with-codec" ] }
+ethereum = { version = "0.14.0", default-features = false, features = [
+	"with-codec",
+] }
 serde = { version = "1.0.137", optional = true }
 
 # Parity
 codec = { package = "parity-scale-codec", version = "3.0.0", default-features = false }
 ethereum-types = { version = "0.14", default-features = false }
 rlp = { version = "0.5", default-features = false }
-scale-info = { version = "2.1.2", default-features = false, features = [ "derive" ] }
+scale-info = { version = "2.1.2", default-features = false, features = [
+	"derive",
+] }
 
 # Substrate
 frame-support = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", version = "4.0.0-dev", default-features = false }
@@ -29,30 +33,36 @@ sp-runtime = { git = "https://github.com/paritytech/substrate", branch = "polkad
 sp-std = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", version = "5.0.0", default-features = false }
 
 # Frontier
-fp-ethereum = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.36", default-features = false }
-fp-evm = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.36", default-features = false }
-fp-rpc = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.36", default-features = false }
-fp-self-contained = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.36", default-features = false }
-pallet-evm = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.36", default-features = false, features = [ "forbid-evm-reentrancy" ] }
+fp-ethereum = { git = "https://github.com/paritytech/frontier", branch = "polkadot-v0.9.36", default-features = false }
+fp-evm = { git = "https://github.com/paritytech/frontier", branch = "polkadot-v0.9.36", default-features = false }
+fp-rpc = { git = "https://github.com/paritytech/frontier", branch = "polkadot-v0.9.36", default-features = false }
+fp-self-contained = { git = "https://github.com/paritytech/frontier", branch = "polkadot-v0.9.36", default-features = false }
+pallet-evm = { git = "https://github.com/paritytech/frontier", branch = "polkadot-v0.9.36", default-features = false, features = [
+	"forbid-evm-reentrancy",
+] }
 xcm-primitives = { path = "../../primitives/xcm/", default-features = false }
 
 [dev-dependencies]
 pallet-evm-precompile-proxy = { path = "../../precompiles/proxy", default-features = false }
 
-pallet-ethereum = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.36", features = [ "forbid-evm-reentrancy" ] }
-pallet-evm = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.36", features = [ "forbid-evm-reentrancy" ] }
+pallet-ethereum = { git = "https://github.com/paritytech/frontier", branch = "polkadot-v0.9.36", features = [
+	"forbid-evm-reentrancy",
+] }
+pallet-evm = { git = "https://github.com/paritytech/frontier", branch = "polkadot-v0.9.36", features = [
+	"forbid-evm-reentrancy",
+] }
 pallet-proxy = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36" }
 
 hex = "0.4.3"
 # Parity
-libsecp256k1 = { version = "0.7", features = [ "hmac", "static-context" ] }
+libsecp256k1 = { version = "0.7", features = ["hmac", "static-context"] }
 # Substrate FRAME
 pallet-balances = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", version = "4.0.0-dev" }
 # Substrate
 sp-core = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", version = "7.0.0" }
 
 [features]
-default = [ "std" ]
+default = ["std"]
 std = [
 	# Parity
 	"codec/std",
@@ -83,4 +93,4 @@ runtime-benchmarks = [
 	"pallet-evm/runtime-benchmarks",
 	"pallet-timestamp/runtime-benchmarks",
 ]
-try-runtime = [ "frame-support/try-runtime" ]
+try-runtime = ["frame-support/try-runtime"]
