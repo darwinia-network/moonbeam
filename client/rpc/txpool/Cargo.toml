@@ -31,7 +31,7 @@ sp-runtime = { git = "https://github.com/paritytech/substrate", branch = "polkad
 sp-std = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36" }
 
 # Frontier
-ethereum-types = "0.14"
-fc-rpc = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.36", features = [
-    "rpc_binary_search_estimate",
+ethereum-types = "0.14.1"
+fc-rpc = { git = "https://github.com/paritytech/frontier", branch = "polkadot-v0.9.36", features = [
+    "rpc-binary-search-estimate",
 ] }

@@ -17,8 +17,8 @@ jsonrpsee = { version = "0.15.0", default-features = false, features = [
 parity-scale-codec = "3.0.0"
 tokio = { version = "1.12.0", features = ["sync", "time"] }
 
-fc-db = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.36" }
-fc-rpc = { git = "https://github.com/darwinia-network/frontier", branch = "polkadot-v0.9.36" }
+fc-db = { git = "https://github.com/paritytech/frontier", branch = "polkadot-v0.9.36" }
+fc-rpc = { git = "https://github.com/paritytech/frontier", branch = "polkadot-v0.9.36" }
 sp-api = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36" }
 sp-blockchain = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36" }
 sp-core = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36" }

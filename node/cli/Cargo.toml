@@ -41,7 +41,7 @@ polkadot-service = { git = "https://github.com/paritytech/polkadot", branch = "r
 substrate-build-script-utils = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36" }
 
 [features]
-default = [ "moonbase-native", "moonbeam-native", "moonriver-native", "wasmtime", "westend-native" ]
+default = [ "moonbase-native", "moonbeam-native", "moonriver-native", "westend-native" ]
 
 westend-native = [ "polkadot-service/westend-native" ]
 
@@ -54,6 +54,5 @@ try-runtime = [
 	"service/try-runtime",
 	"try-runtime-cli",
 ]
-wasmtime = [ "sc-cli/wasmtime" ]
 
 moonbase-runtime-benchmarks = [ "service/moonbase-runtime-benchmarks" ]

@@ -1,6 +1,6 @@
 [package]
 name = "xcm-primitives"
-authors = [ "PureStake" ]
+authors = ["PureStake"]
 edition = "2021"
 homepage = "https://moonbeam.network"
 license = "GPL-3.0-only"
@@ -8,21 +8,29 @@ repository = "https://github.com/PureStake/moonbeam/"
 version = "0.1.0"
 
 [package.metadata.docs.rs]
-targets = [ "x86_64-unknown-linux-gnu" ]
+targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
-ethereum = { version = "0.14.0", default-features = false, features = [ "with-codec" ] }
-ethereum-types = { version = "0.14", default-features = false }
+ethereum = { version = "0.14.0", default-features = false, features = [
+	"with-codec",
+] }
+ethereum-types = { version = "0.14.1", default-features = false }
 hex = { version = "0.4", default-features = false }
 log = "0.4"
-serde = { version = "1.0.101", optional = true, default-features = false, features = [ "derive" ] }
+serde = { version = "1.0.101", optional = true, default-features = false, features = [
+	"derive",
+] }
 sha3 = { version = "0.10", default-features = false }
 
 # Substrate
 frame-support = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", default-features = false }
 frame-system = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", default-features = false }
-parity-scale-codec = { version = "3.0.0", default-features = false, features = [ "derive" ] }
-scale-info = { version = "2.0", default-features = false, features = [ "derive" ] }
+parity-scale-codec = { version = "3.0.0", default-features = false, features = [
+	"derive",
+] }
+scale-info = { version = "2.0", default-features = false, features = [
+	"derive",
+] }
 sp-io = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", default-features = false }
 sp-runtime = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", default-features = false }
 sp-std = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", default-features = false }
@@ -34,7 +42,7 @@ xcm-builder = { git = "https://github.com/paritytech/polkadot", branch = "releas
 xcm-executor = { git = "https://github.com/paritytech/polkadot", branch = "release-v0.9.36", default-features = false }
 
 [features]
-default = [ "std" ]
+default = ["std"]
 std = [
 	"hex/std",
 	"parity-scale-codec/std",

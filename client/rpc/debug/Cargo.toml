@@ -36,10 +36,10 @@ sp-runtime = { git = "https://github.com/paritytech/substrate", branch = "polkad
 ethereum = { version = "0.14.0", default-features = false, features = [
     "with-codec",
 ] }
-ethereum-types = "0.14"
+ethereum-types = "0.14.1"
 fc-consensus = { git = "https://github.com/paritytech/frontier", branch = "polkadot-v0.9.36" }
 fc-db = { git = "https://github.com/paritytech/frontier", branch = "polkadot-v0.9.36" }
 fc-rpc = { git = "https://github.com/paritytech/frontier", branch = "polkadot-v0.9.36", features = [
-    "rpc_binary_search_estimate",
+    "rpc-binary-search-estimate",
 ] }
 fp-rpc = { git = "https://github.com/paritytech/frontier", branch = "polkadot-v0.9.36" }
