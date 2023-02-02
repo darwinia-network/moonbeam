@@ -1,6 +1,6 @@
 [package]
 name = "moonbeam-relay-encoder"
-authors = [ "PureStake" ]
+authors = ["PureStake"]
 edition = "2021"
 homepage = "https://moonbeam.network"
 license = "GPL-3.0-only"
@@ -16,7 +16,9 @@ xcm-primitives = { path = "../../primitives/xcm", default-features = false }
 # Substrate
 frame-system = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", default-features = false }
 pallet-staking = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", default-features = false }
-parity-scale-codec = { version = "3.0.0", default-features = false, features = [ "derive" ] }
+parity-scale-codec = { version = "3.0.0", default-features = false, features = [
+	"derive",
+] }
 sp-runtime = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", default-features = false }
 sp-std = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", default-features = false }
 
@@ -34,7 +36,7 @@ rococo-runtime = { git = "https://github.com/paritytech/polkadot", branch = "rel
 westend-runtime = { git = "https://github.com/paritytech/polkadot", branch = "release-v0.9.36" }
 
 [features]
-default = [ "std" ]
+default = ["std"]
 std = [
 	"cumulus-primitives-core/std",
 	"frame-system/std",

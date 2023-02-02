@@ -1,6 +1,6 @@
 [package]
 name = "pallet-proxy-genesis-companion"
-authors = [ "PureStake" ]
+authors = ["PureStake"]
 description = "A simple pallet that expands pallet-proxy with a genesis configuration"
 edition = "2021"
 version = "0.1.0"
@@ -10,7 +10,9 @@ frame-support = { git = "https://github.com/paritytech/substrate", branch = "pol
 frame-system = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", default-features = false }
 pallet-proxy = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", default-features = false }
 parity-scale-codec = { version = "3.0.0", default-features = false }
-scale-info = { version = "2.0", default-features = false, features = [ "derive" ] }
+scale-info = { version = "2.0", default-features = false, features = [
+	"derive",
+] }
 sp-runtime = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", default-features = false }
 
 [dev-dependencies]
@@ -23,7 +25,7 @@ sp-io = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0
 pallet-evm-precompile-proxy = { path = "../../precompiles/proxy", default-features = false }
 
 [features]
-default = [ "std" ]
+default = ["std"]
 std = [
 	"frame-support/std",
 	"frame-system/std",
@@ -31,4 +33,4 @@ std = [
 	"scale-info/std",
 	"sp-runtime/std",
 ]
-try-runtime = [ "frame-support/try-runtime" ]
+try-runtime = ["frame-support/try-runtime"]

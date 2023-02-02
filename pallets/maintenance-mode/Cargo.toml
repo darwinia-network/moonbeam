@@ -1,6 +1,6 @@
 [package]
 name = "pallet-maintenance-mode"
-authors = [ "PureStake" ]
+authors = ["PureStake"]
 description = "Puts a FRAME-based runtime into maintenance mode where restricted interactions are allowed."
 edition = "2021"
 version = "0.1.0"
@@ -17,7 +17,9 @@ log = "0.4"
 frame-support = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", default-features = false }
 frame-system = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", default-features = false }
 parity-scale-codec = { version = "3.0.0", default-features = false }
-scale-info = { version = "2.0", default-features = false, features = [ "derive" ] }
+scale-info = { version = "2.0", default-features = false, features = [
+	"derive",
+] }
 sp-runtime = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", default-features = false }
 sp-std = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", default-features = false }
 
@@ -29,7 +31,7 @@ sp-core = { git = "https://github.com/paritytech/substrate", branch = "polkadot-
 sp-io = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36" }
 
 [features]
-default = [ "std", "xcm-support" ]
+default = ["std", "xcm-support"]
 std = [
 	"cumulus-primitives-core/std",
 	"frame-support/std",
@@ -38,5 +40,5 @@ std = [
 	"sp-runtime/std",
 	"sp-std/std",
 ]
-try-runtime = [ "frame-support/try-runtime" ]
-xcm-support = [ "cumulus-primitives-core", "xcm-primitives" ]
+try-runtime = ["frame-support/try-runtime"]
+xcm-support = ["cumulus-primitives-core", "xcm-primitives"]

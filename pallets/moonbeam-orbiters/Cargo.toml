@@ -1,6 +1,6 @@
 [package]
 name = "pallet-moonbeam-orbiters"
-authors = [ "PureStake" ]
+authors = ["PureStake"]
 description = "FRAME-based pallet for Moonbeam orbiters program."
 edition = "2021"
 version = "0.1.0"
@@ -13,7 +13,9 @@ frame-benchmarking = { git = "https://github.com/paritytech/substrate", branch =
 frame-support = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", default-features = false }
 frame-system = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", default-features = false }
 parity-scale-codec = { version = "3.0.0", default-features = false }
-scale-info = { version = "2.0", default-features = false, features = [ "derive" ] }
+scale-info = { version = "2.0", default-features = false, features = [
+	"derive",
+] }
 sp-runtime = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", default-features = false }
 sp-std = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", default-features = false }
 
@@ -26,7 +28,7 @@ sp-core = { git = "https://github.com/paritytech/substrate", branch = "polkadot-
 sp-io = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36" }
 
 [features]
-default = [ "std" ]
+default = ["std"]
 std = [
 	"frame-benchmarking/std",
 	"frame-support/std",
@@ -37,5 +39,5 @@ std = [
 	"sp-runtime/std",
 	"sp-std/std",
 ]
-runtime-benchmarks = [ "frame-benchmarking" ]
-try-runtime = [ "frame-support/try-runtime" ]
+runtime-benchmarks = ["frame-benchmarking"]
+try-runtime = ["frame-support/try-runtime"]

@@ -1,20 +1,24 @@
 [package]
 name = "pallet-ethereum-chain-id"
-authors = [ "PureStake" ]
+authors = ["PureStake"]
 edition = "2021"
 version = "1.0.0"
 
 [dependencies]
-serde = { version = "1.0.101", optional = true, features = [ "derive" ] }
+serde = { version = "1.0.101", optional = true, features = ["derive"] }
 
 # Substrate
-frame-support = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", default-features = false }
-frame-system = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", default-features = false }
-parity-scale-codec = { version = "3.0.0", default-features = false, features = [ "derive" ] }
-scale-info = { version = "2.0", default-features = false, features = [ "derive" ] }
+frame-support = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.38", default-features = false }
+frame-system = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.38", default-features = false }
+parity-scale-codec = { version = "3.0.0", default-features = false, features = [
+	"derive",
+] }
+scale-info = { version = "2.0", default-features = false, features = [
+	"derive",
+] }
 
 [features]
-default = [ "std" ]
+default = ["std"]
 std = [
 	"frame-support/std",
 	"frame-system/std",
@@ -22,4 +26,4 @@ std = [
 	"scale-info/std",
 	"serde",
 ]
-try-runtime = [ "frame-support/try-runtime" ]
+try-runtime = ["frame-support/try-runtime"]
