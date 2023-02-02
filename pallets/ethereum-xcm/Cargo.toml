@@ -25,12 +25,12 @@ scale-info = { version = "2.1.2", default-features = false, features = [
 ] }
 
 # Substrate
-frame-support = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", version = "4.0.0-dev", default-features = false }
-frame-system = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", version = "4.0.0-dev", default-features = false }
-pallet-timestamp = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", version = "4.0.0-dev", default-features = false }
-sp-io = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", version = "7.0.0", default-features = false }
-sp-runtime = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", version = "7.0.0", default-features = false }
-sp-std = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", version = "5.0.0", default-features = false }
+frame-support = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.38", version = "4.0.0-dev", default-features = false }
+frame-system = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.38", version = "4.0.0-dev", default-features = false }
+pallet-timestamp = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.38", version = "4.0.0-dev", default-features = false }
+sp-io = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.38", version = "7.0.0", default-features = false }
+sp-runtime = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.38", version = "7.0.0", default-features = false }
+sp-std = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.38", version = "5.0.0", default-features = false }
 
 # Frontier
 fp-ethereum = { git = "https://github.com/paritytech/frontier", branch = "polkadot-v0.9.36", default-features = false }
@@ -51,15 +51,15 @@ pallet-ethereum = { git = "https://github.com/paritytech/frontier", branch = "po
 pallet-evm = { git = "https://github.com/paritytech/frontier", branch = "polkadot-v0.9.36", features = [
 	"forbid-evm-reentrancy",
 ] }
-pallet-proxy = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36" }
+pallet-proxy = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.38" }
 
 hex = "0.4.3"
 # Parity
 libsecp256k1 = { version = "0.7", features = ["hmac", "static-context"] }
 # Substrate FRAME
-pallet-balances = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", version = "4.0.0-dev" }
+pallet-balances = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.38", version = "4.0.0-dev" }
 # Substrate
-sp-core = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.36", version = "7.0.0" }
+sp-core = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.38", version = "7.0.0" }
 
 [features]
 default = ["std"]

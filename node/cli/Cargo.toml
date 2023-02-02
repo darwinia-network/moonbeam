@@ -13,7 +13,7 @@ cli-opt = { package = "moonbeam-cli-opt", path = "../cli-opt", default-features 
 service = { package = "moonbeam-service", path = "../service", default-features = false }
 
 # Substrate
-frame-benchmarking-cli = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.38" }
+# frame-benchmarking-cli = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.38" }
 sc-cli = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.38" }
 sc-finality-grandpa = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.38" }
 sc-service = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.38" }
@@ -35,7 +35,7 @@ nimbus-primitives = { git = "https://github.com/purestake/nimbus", branch = "moo
 polkadot-cli = { git = "https://github.com/paritytech/polkadot", branch = "release-v0.9.36" }
 polkadot-parachain = { git = "https://github.com/paritytech/polkadot", branch = "release-v0.9.36" }
 polkadot-primitives = { git = "https://github.com/paritytech/polkadot", branch = "release-v0.9.36" }
-polkadot-service = { git = "https://github.com/paritytech/polkadot", branch = "release-v0.9.36" }
+# polkadot-service = { git = "https://github.com/paritytech/polkadot", branch = "release-v0.9.36" }
 
 [build-dependencies]
 substrate-build-script-utils = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.38" }
@@ -48,14 +48,14 @@ default = [
 	"westend-native",
 ]
 
-westend-native = ["polkadot-service/westend-native"]
+westend-native = []
 
 moonbase-native = ["service/moonbase-native", "westend-native"]
 moonbeam-native = ["service/moonbeam-native"]
 moonriver-native = ["service/moonriver-native"]
 
 runtime-benchmarks = [
-	"polkadot-service/runtime-benchmarks",
+	# "polkadot-service/runtime-benchmarks",
 	"service/runtime-benchmarks",
 ]
 try-runtime = ["service/try-runtime", "try-runtime-cli"]
