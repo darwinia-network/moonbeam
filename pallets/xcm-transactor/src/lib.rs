@@ -98,7 +98,7 @@ pub mod pallet {
 	use sp_std::convert::TryFrom;
 	use sp_std::prelude::*;
 	use xcm::{latest::prelude::*, VersionedMultiLocation};
-	use xcm_executor::traits::{InvertLocation, TransactAsset, WeightBounds};
+	use xcm_executor::traits::{TransactAsset, WeightBounds};
 	pub(crate) use xcm_primitives::XcmV2Weight;
 	use xcm_primitives::{
 		FilterMaxAssetFee, HrmpAvailableCalls, HrmpEncodeCall, UtilityAvailableCalls,
@@ -148,7 +148,7 @@ pub mod pallet {
 		type Weigher: WeightBounds<Self::RuntimeCall>;
 
 		/// Means of inverting a location.
-		type LocationInverter: InvertLocation;
+		type LocationInverter: Contains<(MultiLocation, Junction)>;;
 
 		/// Self chain location.
 		#[pallet::constant]
