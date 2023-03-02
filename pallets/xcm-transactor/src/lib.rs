@@ -854,16 +854,16 @@ pub mod pallet {
 			let transact_message: Xcm<()> = Self::transact_message(
 				dest.clone(),
 				fee,
-				total_weight,
+				Weight::from_ref_time(total_weight),
 				call,
-				transact_required_weight_at_most,
+				Weight::from_ref_time(transact_required_weight_at_most),
 				origin_kind,
 				with_appendix,
 			)?;
 
 			// Send to sovereign
 			// T::XcmSender::send_xcm(dest, transact_message).map_err(|_| Error::<T>::ErrorSending)?;
-			let ticket = T::XcmSender::validate(Some(dest), Some(transact_message)).map_err(|_| Error::<T>::ErrorSending)?;
+			let ticket = T::XcmSender::validate(&mut Some(dest), &mut Some(transact_message)).map_err(|_| Error::<T>::ErrorSending)?;
 			T::XcmSender::deliver(ticket).map_err(|_| Error::<T>::ErrorSending)?;
 			Ok(())
 		}
@@ -890,9 +890,9 @@ pub mod pallet {
 			let mut transact_message: Xcm<()> = Self::transact_message(
 				dest.clone(),
 				fee,
-				total_weight,
+				Weight::from_ref_time(total_weight),
 				call,
-				transact_required_weight_at_most,
+				Weight::from_ref_time(transact_required_weight_at_most),
 				origin_kind,
 				None,
 			)?;
@@ -908,7 +908,7 @@ pub mod pallet {
 
 			// Send to destination chain
 			// T::XcmSender::send_xcm(dest, transact_message).map_err(|_| Error::<T>::ErrorSending)?;
-			let ticket = T::XcmSender::validate(Some(dest), Some(transact_message)).map_err(|_| Error::<T>::ErrorSending)?;
+			let ticket = T::XcmSender::validate(&mut Some(dest), &mut Some(transact_message)).map_err(|_| Error::<T>::ErrorSending)?;
 			T::XcmSender::deliver(ticket).map_err(|_| Error::<T>::ErrorSending)?;
 
 			Ok(())
@@ -1005,11 +1005,10 @@ pub mod pallet {
 		) -> Result<Instruction<()>, DispatchError> {
 			let ancestry = T::LocationInverter::invert_target();
 			beneficiary
-				.reanchor(at, &ancestry)
+				.reanchor(at, ancestry)
 				.map_err(|_| Error::<T>::CannotReanchor)?;
 			Ok(DepositAsset {
 				assets: Wild(All),
-				max_assets: 1,
 				beneficiary,
 			})
 		}
@@ -1074,7 +1073,7 @@ pub mod pallet {
 				},
 			]);
 			T::Weigher::weight(&mut xcm.into()).map_or(XcmV2Weight::max_value(), |w| {
-				T::BaseXcmWeight::get().saturating_add(w)
+				T::BaseXcmWeight::get().saturating_add(w.ref_time())
 			})
 		}
 
