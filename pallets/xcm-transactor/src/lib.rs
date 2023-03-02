@@ -148,7 +148,7 @@ pub mod pallet {
 		type Weigher: WeightBounds<Self::RuntimeCall>;
 
 		/// Means of inverting a location.
-		type LocationInverter: Contains<(MultiLocation, Junction)>;;
+		type LocationInverter: Contains<(MultiLocation, Junction)>;
 
 		/// Self chain location.
 		#[pallet::constant]
