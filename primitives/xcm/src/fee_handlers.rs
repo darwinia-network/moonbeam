@@ -32,13 +32,14 @@ use xcm::latest::{
 
 use xcm_builder::TakeRevenue;
 use xcm_executor::traits::{MatchesFungibles, WeightTrader};
+use frame_support::weights::Weight;
 
 pub struct FirstAssetTrader<
 	AssetType: From<MultiLocation> + Clone,
 	AssetIdInfoGetter: UnitsToWeightRatio<AssetType>,
 	R: TakeRevenue,
 >(
-	frame_support::weights::Weight,
+	Weight,
 	Option<(MultiLocation, u128, u128)>, // id, amount, units_per_second
 	PhantomData<(AssetType, AssetIdInfoGetter, R)>,
 );
@@ -49,11 +50,11 @@ impl<
 	> WeightTrader for FirstAssetTrader<AssetType, AssetIdInfoGetter, R>
 {
 	fn new() -> Self {
-		FirstAssetTrader(0, None, PhantomData)
+		FirstAssetTrader(Weight::from_ref_time(0), None, PhantomData)
 	}
 	fn buy_weight(
 		&mut self,
-		weight: frame_support::weights::Weight,
+		weight: Weight,
 		payment: xcm_executor::Assets,
 	) -> Result<xcm_executor::Assets, XcmError> {
 		// can only call one time
@@ -62,7 +63,7 @@ impl<
 			return Err(XcmError::NotWithdrawable);
 		}
 
-		assert_eq!(self.0, 0);
+		assert_eq!(self.0, Weight::from_ref_time(0));
 		let first_asset = payment
 			.clone()
 			.fungible_assets_iter()
@@ -113,7 +114,7 @@ impl<
 	}
 
 	// Refund weight. We will refund in whatever asset is stored in self.
-	fn refund_weight(&mut self, weight: frame_support::weights::Weight) -> Option<MultiAsset> {
+	fn refund_weight(&mut self, weight: Weight) -> Option<MultiAsset> {
 		if let Some((id, prev_amount, units_per_second)) = self.1.clone() {
 			let weight = weight.min(self.0);
 			self.0 -= weight;
