@@ -148,7 +148,7 @@ pub mod pallet {
 		type Weigher: WeightBounds<Self::RuntimeCall>;
 
 		/// Means of inverting a location.
-		type LocationInverter: frame_support::traits::Contains<(MultiLocation, Junction)>;
+		type UniversalLocation: Get<InteriorMultiLocation>;
 
 		/// Self chain location.
 		#[pallet::constant]
@@ -864,7 +864,7 @@ pub mod pallet {
 			// Send to sovereign
 			// T::XcmSender::send_xcm(dest, transact_message).map_err(|_| Error::<T>::ErrorSending)?;
 			let ticket = T::XcmSender::validate(&mut Some(dest), &mut Some(transact_message)).map_err(|_| Error::<T>::ErrorSending)?;
-			T::XcmSender::deliver(ticket).map_err(|_| Error::<T>::ErrorSending)?;
+			T::XcmSender::deliver(ticket.0).map_err(|_| Error::<T>::ErrorSending)?;
 			Ok(())
 		}
 
@@ -909,7 +909,7 @@ pub mod pallet {
 			// Send to destination chain
 			// T::XcmSender::send_xcm(dest, transact_message).map_err(|_| Error::<T>::ErrorSending)?;
 			let ticket = T::XcmSender::validate(&mut Some(dest), &mut Some(transact_message)).map_err(|_| Error::<T>::ErrorSending)?;
-			T::XcmSender::deliver(ticket).map_err(|_| Error::<T>::ErrorSending)?;
+			T::XcmSender::deliver(ticket.0).map_err(|_| Error::<T>::ErrorSending)?;
 
 			Ok(())
 		}
@@ -974,9 +974,9 @@ pub mod pallet {
 			at: &MultiLocation,
 			weight: Weight,
 		) -> Result<Instruction<()>, DispatchError> {
-			let ancestry = T::LocationInverter::invert_target();
+			let ancestry = T::UniversalLocation::invert_target();
 			let fees = asset
-				.reanchored(at, &ancestry)
+				.reanchored(at, ancestry)
 				.map_err(|_| Error::<T>::CannotReanchor)?;
 
 			Ok(BuyExecution {
@@ -990,9 +990,9 @@ pub mod pallet {
 			asset: MultiAsset,
 			at: &MultiLocation,
 		) -> Result<Instruction<()>, DispatchError> {
-			let ancestry = T::LocationInverter::invert_target();
+			let ancestry = T::UniversalLocation::invert_target();
 			let fees = asset
-				.reanchored(at, &ancestry)
+				.reanchored(at, ancestry)
 				.map_err(|_| Error::<T>::CannotReanchor)?;
 
 			Ok(WithdrawAsset(fees.into()))
@@ -1003,7 +1003,7 @@ pub mod pallet {
 			mut beneficiary: MultiLocation,
 			at: &MultiLocation,
 		) -> Result<Instruction<()>, DispatchError> {
-			let ancestry = T::LocationInverter::invert_target();
+			let ancestry = T::UniversalLocation::invert_target();
 			beneficiary
 				.reanchor(at, ancestry)
 				.map_err(|_| Error::<T>::CannotReanchor)?;
