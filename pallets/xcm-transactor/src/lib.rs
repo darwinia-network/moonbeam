@@ -974,7 +974,7 @@ pub mod pallet {
 			at: &MultiLocation,
 			weight: Weight,
 		) -> Result<Instruction<()>, DispatchError> {
-			let ancestry = T::UniversalLocation::invert_target();
+			let ancestry = T::UniversalLocation::get().invert_target();
 			let fees = asset
 				.reanchored(at, ancestry)
 				.map_err(|_| Error::<T>::CannotReanchor)?;
@@ -990,7 +990,7 @@ pub mod pallet {
 			asset: MultiAsset,
 			at: &MultiLocation,
 		) -> Result<Instruction<()>, DispatchError> {
-			let ancestry = T::UniversalLocation::invert_target();
+			let ancestry = T::UniversalLocation::get().invert_target();
 			let fees = asset
 				.reanchored(at, ancestry)
 				.map_err(|_| Error::<T>::CannotReanchor)?;
@@ -1003,7 +1003,7 @@ pub mod pallet {
 			mut beneficiary: MultiLocation,
 			at: &MultiLocation,
 		) -> Result<Instruction<()>, DispatchError> {
-			let ancestry = T::UniversalLocation::invert_target();
+			let ancestry = T::UniversalLocation::get().invert_target();
 			beneficiary
 				.reanchor(at, ancestry)
 				.map_err(|_| Error::<T>::CannotReanchor)?;
