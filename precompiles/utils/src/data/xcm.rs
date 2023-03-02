@@ -24,7 +24,7 @@ use {
 	alloc::string::String,
 	frame_support::{ensure, traits::ConstU32},
 	sp_std::vec::Vec,
-	xcm::latest::{Junction, Junctions, MultiLocation, NetworkId},
+	xcm::opaque::v2::{Junction, Junctions, MultiLocation, NetworkId},
 };
 
 pub const JUNCTION_SIZE_LIMIT: u32 = 2u32.pow(16);
