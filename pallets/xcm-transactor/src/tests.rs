@@ -16,7 +16,7 @@
 
 use crate::mock::*;
 use crate::*;
-use cumulus_primitives_core::relay_chain::v2::HrmpChannelId;
+use cumulus_primitives_core::relay_chain::HrmpChannelId;
 use frame_support::dispatch::DispatchError;
 use frame_support::{assert_noop, assert_ok, weights::constants::WEIGHT_REF_TIME_PER_SECOND};
 use sp_std::boxed::Box;

@@ -36,7 +36,7 @@ use xcm_primitives::UtilityEncodeCall;
 use xcm_simulator::TestExt;
 mod common;
 use common::ExtBuilder;
-use cumulus_primitives_core::relay_chain::v2::HrmpChannelId;
+use cumulus_primitives_core::relay_chain::HrmpChannelId;
 // Send a relay asset (like DOT) to a parachain A
 #[test]
 fn receive_relay_asset_from_relay() {

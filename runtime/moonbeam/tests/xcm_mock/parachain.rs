@@ -25,7 +25,7 @@ use frame_support::{
 	PalletId,
 };
 
-use cumulus_primitives_core::relay_chain::v2::HrmpChannelId;
+use cumulus_primitives_core::relay_chain::HrmpChannelId;
 use frame_system::{EnsureNever, EnsureRoot};
 use orml_traits::parameter_type_with_key;
 use parity_scale_codec::{Decode, Encode};

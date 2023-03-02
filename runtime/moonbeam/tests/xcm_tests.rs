@@ -27,7 +27,7 @@ use xcm_mock::parachain;
 use xcm_mock::relay_chain;
 use xcm_mock::*;
 
-use cumulus_primitives_core::relay_chain::v2::HrmpChannelId;
+use cumulus_primitives_core::relay_chain::HrmpChannelId;
 use pallet_asset_manager::LocalAssetIdCreator;
 use pallet_xcm_transactor::{
 	Currency, CurrencyPayment, HrmpInitParams, HrmpOperation, TransactWeights,

@@ -89,7 +89,7 @@ pub mod pallet {
 
 	use crate::weights::WeightInfo;
 	use crate::CurrencyIdOf;
-	use cumulus_primitives_core::{relay_chain::v2::HrmpChannelId, ParaId};
+	use cumulus_primitives_core::{relay_chain::HrmpChannelId, ParaId};
 	use frame_support::{pallet_prelude::*, weights::constants::WEIGHT_REF_TIME_PER_SECOND};
 	use frame_system::{ensure_signed, pallet_prelude::*};
 	use orml_traits::location::{Parse, Reserve};
