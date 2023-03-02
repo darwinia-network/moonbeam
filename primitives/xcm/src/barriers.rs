@@ -36,7 +36,7 @@ impl<T: Contains<MultiLocation>> ShouldExecute for AllowTopLevelPaidExecutionDes
 		origin: &MultiLocation,
 		message: &mut [xcm::latest::prelude::Instruction<Call>],
 		max_weight: frame_support::weights::Weight,
-		_weight_credit: &mut Weight,
+		_weight_credit: &mut frame_support::weights::Weight,
 	) -> Result<(), ()> {
 		log::trace!(
 			target: "xcm::barriers",
@@ -62,8 +62,8 @@ impl<T: Contains<MultiLocation>> ShouldExecute for AllowTopLevelPaidExecutionDes
 			BuyExecution {
 				weight_limit: Limited(ref mut weight),
 				..
-			} if *weight >= max_weight => {
-				*weight = max_weight;
+			} if weight.all_gte(max_weight) => {
+				*weight = weight.max(max_weight);
 				Ok(())
 			}
 			BuyExecution {
