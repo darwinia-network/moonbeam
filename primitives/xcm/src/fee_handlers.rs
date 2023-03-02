@@ -38,7 +38,7 @@ pub struct FirstAssetTrader<
 	AssetIdInfoGetter: UnitsToWeightRatio<AssetType>,
 	R: TakeRevenue,
 >(
-	Weight,
+	frame_support::weights::Weight,
 	Option<(MultiLocation, u128, u128)>, // id, amount, units_per_second
 	PhantomData<(AssetType, AssetIdInfoGetter, R)>,
 );
