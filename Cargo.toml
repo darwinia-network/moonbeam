@@ -269,9 +269,9 @@ cumulus-relay-chain-rpc-interface = { git = "https://github.com/paritytech/cumul
 nimbus-consensus = { git = "https://github.com/purestake/nimbus", branch = "moonbeam-polkadot-v0.9.37" }
 
 # Polkadot / XCM (wasm)
-orml-traits = { git = "https://github.com/open-web3-stack/open-runtime-module-library", branch = "polkadot-v0.9.37", default-features = false }
-orml-xcm-support = { git = "https://github.com/open-web3-stack/open-runtime-module-library", branch = "polkadot-v0.9.37", default-features = false }
-orml-xtokens = { git = "https://github.com/open-web3-stack/open-runtime-module-library", branch = "polkadot-v0.9.37", default-features = false }
+orml-traits = { git = "https://github.com/open-web3-stack/open-runtime-module-library", branch = "polkadot-v0.9.38", default-features = false }
+orml-xcm-support = { git = "https://github.com/open-web3-stack/open-runtime-module-library", branch = "polkadot-v0.9.38", default-features = false }
+orml-xtokens = { git = "https://github.com/open-web3-stack/open-runtime-module-library", branch = "polkadot-v0.9.38", default-features = false }
 pallet-xcm = { git = "https://github.com/paritytech/polkadot", branch = "release-v0.9.38", default-features = false }
 pallet-xcm-benchmarks = { git = "https://github.com/paritytech/polkadot", branch = "release-v0.9.38", default-features = false }
 polkadot-core-primitives = { git = "https://github.com/paritytech/polkadot", branch = "release-v0.9.38", default-features = false }
