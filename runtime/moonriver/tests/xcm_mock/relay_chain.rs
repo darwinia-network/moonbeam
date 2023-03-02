@@ -152,8 +152,8 @@ pub struct AllowTopLevelPaidExecutionDescendOriginFirst<T>(PhantomData<T>);
 impl<T: Contains<MultiLocation>> ShouldExecute for AllowTopLevelPaidExecutionDescendOriginFirst<T> {
 	fn should_execute<Call>(
 		origin: &MultiLocation,
-		message: &mut [Instruction<RuntimeCall>],
-		max_weight: Weight,
+		message: &mut [xcm::latest::prelude::Instruction<Call>],
+		max_weight: frame_support::weights::Weight,
 		_weight_credit: &mut Weight,
 	) -> Result<(), ()> {
 		log::trace!(
