@@ -167,7 +167,7 @@ impl sp_runtime::traits::Convert<AccountId, MultiLocation> for AccountIdToMultiL
 
 parameter_types! {
 	pub ParachainId: cumulus_primitives_core::ParaId = 100.into();
-	pub LocalNetworkId: NetworkId = NetworkId::Any;
+	pub LocalNetworkId: Option<NetworkId> = None;
 }
 
 parameter_types! {
@@ -370,7 +370,7 @@ impl InvertLocation for InvertNothing {
 }
 
 parameter_types! {
-	pub Ancestry: MultiLocation = Parachain(ParachainId::get().into()).into();
+	pub UniversalLocation: InteriorMultiLocation = Parachain(ParachainId::get().into()).into();
 
 	pub const BaseXcmWeight: XcmV2Weight = 1000;
 	pub const RelayNetwork: NetworkId = NetworkId::Polkadot;

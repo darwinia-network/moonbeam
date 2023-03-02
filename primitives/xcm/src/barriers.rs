@@ -34,9 +34,9 @@ pub struct AllowTopLevelPaidExecutionDescendOriginFirst<T>(PhantomData<T>);
 impl<T: Contains<MultiLocation>> ShouldExecute for AllowTopLevelPaidExecutionDescendOriginFirst<T> {
 	fn should_execute<Call>(
 		origin: &MultiLocation,
-		message: &mut Xcm<Call>,
-		max_weight: u64,
-		_weight_credit: &mut u64,
+		message: &mut [Instruction<RuntimeCall>],
+		max_weight: Weight,
+		_weight_credit: &mut Weight,
 	) -> Result<(), ()> {
 		log::trace!(
 			target: "xcm::barriers",
@@ -45,7 +45,7 @@ impl<T: Contains<MultiLocation>> ShouldExecute for AllowTopLevelPaidExecutionDes
 			origin, message, max_weight, _weight_credit,
 		);
 		ensure!(T::contains(origin), ());
-		let mut iter = message.0.iter_mut();
+		let mut iter = message.iter_mut();
 		// Make sure the first instruction is DescendOrigin
 		iter.next()
 			.filter(|instruction| matches!(instruction, DescendOrigin(_)))

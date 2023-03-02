@@ -141,7 +141,7 @@ parameter_types! {
 	pub const KsmLocation: MultiLocation = MultiLocation::parent();
 	pub const RelayNetwork: NetworkId = NetworkId::Kusama;
 	pub RelayChainOrigin: RuntimeOrigin = cumulus_pallet_xcm::Origin::Relay.into();
-	pub Ancestry: MultiLocation = Parachain(MsgQueue::parachain_id().into()).into();
+	pub UniversalLocation: InteriorMultiLocation = Parachain(MsgQueue::parachain_id().into()).into();
 	pub const Local: MultiLocation = Here.into();
 	pub CheckingAccount: AccountId = PolkadotXcm::check_account();
 	pub KsmPerSecond: (xcm::latest::prelude::AssetId, u128) = (Concrete(KsmLocation::get()), 1);
@@ -223,8 +223,9 @@ pub type XcmOriginToTransactDispatchOrigin = (
 
 parameter_types! {
 	// One XCM operation is 1_000_000_000 weight - almost certainly a conservative estimate.
-	pub UnitWeightCost: XcmV2Weight = 100;
+	pub UnitWeightCost: Weight = Weight::from_parts(100, 64*1024);
 	pub const MaxInstructions: u32 = 100;
+	pub const MaxAssetsIntoHolding: u32 = 64;
 }
 
 match_types! {
@@ -260,7 +261,7 @@ impl Config for XcmConfig {
 	type IsReserve =
 		orml_xcm_support::MultiNativeAsset<orml_traits::location::RelativeReserveProvider>;
 	type IsTeleporter = ();
-	type LocationInverter = LocationInverter<Ancestry>;
+	type UniversalLocation = UniversalLocation;
 	type Barrier = Barrier;
 	type Weigher = FixedWeightBounds<UnitWeightCost, RuntimeCall, MaxInstructions>;
 	type Trader = FixedRateOfFungible<KsmPerSecond, ()>;
@@ -286,7 +287,7 @@ impl pallet_xcm::Config for Runtime {
 	type XcmTeleportFilter = Everything;
 	type XcmReserveTransferFilter = Everything;
 	type Weigher = FixedWeightBounds<UnitWeightCost, RuntimeCall, MaxInstructions>;
-	type LocationInverter = LocationInverter<Ancestry>;
+	type UniversalLocation = UniversalLocation;
 	type RuntimeOrigin = RuntimeOrigin;
 	type RuntimeCall = RuntimeCall;
 	const VERSION_DISCOVERY_QUEUE_SIZE: u32 = 100;

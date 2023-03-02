@@ -94,6 +94,7 @@ impl xcm_executor::traits::TransactAsset for NoAssetTransactor {
 
 parameter_types! {
 	pub const MaxInstructions: u32 = 100;
+	pub const MaxAssetsIntoHolding: u32 = 64;
 }
 
 pub struct XcmConfig;

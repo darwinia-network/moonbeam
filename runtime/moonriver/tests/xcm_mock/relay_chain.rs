@@ -110,9 +110,9 @@ impl configuration::Config for Runtime {
 parameter_types! {
 	pub const KsmLocation: MultiLocation = Here.into();
 	pub const KusamaNetwork: NetworkId = NetworkId::Kusama;
-	pub const AnyNetwork: NetworkId = NetworkId::Any;
-	pub Ancestry: MultiLocation = Here.into();
-	pub UnitWeightCost: XcmV2Weight = 1_000;
+	pub const AnyNetwork: Option<NetworkId> = None;
+	pub UniversalLocation: InteriorMultiLocation = Here.into();
+	pub UnitWeightCost: Weight = Weight::from_parts(1000, 64*1024);
 }
 
 pub type SovereignAccountOf = (
@@ -134,9 +134,10 @@ type LocalOriginConverter = (
 );
 
 parameter_types! {
-	pub const BaseXcmWeight: XcmV2Weight = 1_000;
+	pub const BaseXcmWeight: Weight = Weight::from_parts(1000, 64*1024);
 	pub KsmPerSecond: (AssetId, u128) = (Concrete(KsmLocation::get()), 1);
 	pub const MaxInstructions: u32 = 100;
+	pub const MaxAssetsIntoHolding: u32 = 64;
 }
 
 use frame_support::ensure;
@@ -151,9 +152,9 @@ pub struct AllowTopLevelPaidExecutionDescendOriginFirst<T>(PhantomData<T>);
 impl<T: Contains<MultiLocation>> ShouldExecute for AllowTopLevelPaidExecutionDescendOriginFirst<T> {
 	fn should_execute<Call>(
 		origin: &MultiLocation,
-		message: &mut Xcm<Call>,
-		max_weight: XcmV2Weight,
-		_weight_credit: &mut XcmV2Weight,
+		message: &mut [Instruction<RuntimeCall>],
+		max_weight: Weight,
+		_weight_credit: &mut Weight,
 	) -> Result<(), ()> {
 		log::trace!(
 			target: "xcm::barriers",
@@ -162,7 +163,7 @@ impl<T: Contains<MultiLocation>> ShouldExecute for AllowTopLevelPaidExecutionDes
 			origin, message, max_weight, _weight_credit,
 		);
 		ensure!(T::contains(origin), ());
-		let mut iter = message.0.iter_mut();
+		let mut iter = message.iter_mut();
 		let mut i = iter.next().ok_or(())?;
 		match i {
 			DescendOrigin(..) => (),
@@ -215,7 +216,7 @@ impl Config for XcmConfig {
 	type OriginConverter = LocalOriginConverter;
 	type IsReserve = ();
 	type IsTeleporter = ();
-	type LocationInverter = LocationInverter<Ancestry>;
+	type UniversalLocation = UniversalLocation;
 	type Barrier = Barrier;
 	type Weigher = FixedWeightBounds<BaseXcmWeight, RuntimeCall, MaxInstructions>;
 	type Trader = FixedRateOfFungible<KsmPerSecond, ()>;
@@ -239,7 +240,7 @@ impl pallet_xcm::Config for Runtime {
 	type XcmTeleportFilter = Everything;
 	type XcmReserveTransferFilter = Everything;
 	type Weigher = FixedWeightBounds<BaseXcmWeight, RuntimeCall, MaxInstructions>;
-	type LocationInverter = LocationInverter<Ancestry>;
+	type UniversalLocation = UniversalLocation;
 	type RuntimeOrigin = RuntimeOrigin;
 	type RuntimeCall = RuntimeCall;
 	const VERSION_DISCOVERY_QUEUE_SIZE: u32 = 100;

@@ -54,7 +54,7 @@ impl xcm_executor::traits::Convert<MultiLocation, u64> for AccountIdConverter {
 }
 
 parameter_types! {
-	pub Ancestry: MultiLocation = Junction::Parachain(101).into();
+	pub UniversalLocation: InteriorMultiLocation = Junction::Parachain(101).into();
 	pub UnitWeightCost: u64 = 10;
 	pub WeightPrice: (AssetId, u128) = (Concrete(MultiLocation::parent()), 1_000_000);
 }

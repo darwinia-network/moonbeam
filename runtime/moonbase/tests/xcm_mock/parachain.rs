@@ -209,8 +209,9 @@ pub type XcmOriginToTransactDispatchOrigin = (
 );
 
 parameter_types! {
-	pub const UnitWeightCost: XcmV2Weight = 1u64;
+	pub const UnitWeightCost: Weight = Weight::from_parts(1, 64*1024);
 	pub MaxInstructions: u32 = 100;
+	pub const MaxAssetsIntoHolding: u32 = 64;
 }
 
 // Instructing how incoming xcm assets will be handled
@@ -328,7 +329,7 @@ parameter_types! {
 parameter_types! {
 	pub const RelayNetwork: NetworkId = NetworkId::Polkadot;
 	pub RelayChainOrigin: RuntimeOrigin = cumulus_pallet_xcm::Origin::Relay.into();
-	pub Ancestry: MultiLocation = Parachain(MsgQueue::parachain_id().into()).into();
+	pub UniversalLocation: InteriorMultiLocation = Parachain(MsgQueue::parachain_id().into()).into();
 
 	// New Self Reserve location, defines the multilocation identifiying the self-reserve currency
 	// This is used to match it also against our Balances pallet when we receive such
@@ -364,7 +365,7 @@ impl Config for XcmConfig {
 		xcm_primitives::AbsoluteAndRelativeReserve<SelfLocationAbsolute>,
 	>;
 	type IsTeleporter = ();
-	type LocationInverter = LocationInverter<Ancestry>;
+	type UniversalLocation = UniversalLocation;
 	type Barrier = Barrier;
 	type Weigher = FixedWeightBounds<UnitWeightCost, RuntimeCall, MaxInstructions>;
 	// We use three traders
@@ -425,7 +426,7 @@ where
 }
 
 parameter_types! {
-	pub const BaseXcmWeight: XcmV2Weight = 100;
+	pub const BaseXcmWeight: Weight = Weight::from_parts(100, 64*1024);
 	pub const MaxAssetsForTransfer: usize = 2;
 	pub SelfLocation: MultiLocation = MultiLocation::here();
 	pub SelfLocationAbsolute: MultiLocation = MultiLocation {
@@ -454,7 +455,7 @@ impl orml_xtokens::Config for Runtime {
 	type SelfLocation = SelfLocation;
 	type Weigher = xcm_builder::FixedWeightBounds<UnitWeightCost, RuntimeCall, MaxInstructions>;
 	type BaseXcmWeight = BaseXcmWeight;
-	type LocationInverter = LocationInverter<Ancestry>;
+	type UniversalLocation = UniversalLocation;
 	type MaxAssetsForTransfer = MaxAssetsForTransfer;
 	type MinXcmFee = ParachainMinFee;
 	type MultiLocationsFilter = Everything;
@@ -877,7 +878,7 @@ impl pallet_xcm_transactor::Config for Runtime {
 		CurrencyIdtoMultiLocation<xcm_primitives::AsAssetType<AssetId, AssetType, AssetManager>>;
 	type SelfLocation = SelfLocation;
 	type Weigher = xcm_builder::FixedWeightBounds<UnitWeightCost, RuntimeCall, MaxInstructions>;
-	type LocationInverter = LocationInverter<Ancestry>;
+	type UniversalLocation = UniversalLocation;
 	type XcmSender = XcmRouter;
 	type BaseXcmWeight = BaseXcmWeight;
 	type AssetTransactor = AssetTransactors;
