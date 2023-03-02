@@ -841,7 +841,7 @@ pub mod pallet {
 
 				// Construct the local withdraw message with the previous calculated amount
 				// This message deducts and burns "amount" from the caller when executed
-				T::AssetTransactor::withdraw_asset(&fee.clone().into(), &origin_as_mult)
+				T::AssetTransactor::withdraw_asset(&fee.clone().into(), &origin_as_mult, None)
 					.map_err(|_| Error::<T>::UnableToWithdrawAsset)?;
 			}
 
@@ -862,8 +862,9 @@ pub mod pallet {
 			)?;
 
 			// Send to sovereign
-			T::XcmSender::send_xcm(dest, transact_message).map_err(|_| Error::<T>::ErrorSending)?;
-
+			// T::XcmSender::send_xcm(dest, transact_message).map_err(|_| Error::<T>::ErrorSending)?;
+			let ticket = T::XcmSender::validate(Some(dest), Some(transact_message)).map_err(|_| Error::<T>::ErrorSending)?;
+			T::XcmSender::deliver(ticket).map_err(|_| Error::<T>::ErrorSending)?;
 			Ok(())
 		}
 
@@ -906,7 +907,9 @@ pub mod pallet {
 			transact_message.0.insert(0, DescendOrigin(interior));
 
 			// Send to destination chain
-			T::XcmSender::send_xcm(dest, transact_message).map_err(|_| Error::<T>::ErrorSending)?;
+			// T::XcmSender::send_xcm(dest, transact_message).map_err(|_| Error::<T>::ErrorSending)?;
+			let ticket = T::XcmSender::validate(Some(dest), Some(transact_message)).map_err(|_| Error::<T>::ErrorSending)?;
+			T::XcmSender::deliver(ticket).map_err(|_| Error::<T>::ErrorSending)?;
 
 			Ok(())
 		}
@@ -944,9 +947,9 @@ pub mod pallet {
 		fn transact_message(
 			dest: MultiLocation,
 			asset: MultiAsset,
-			dest_weight: XcmV2Weight,
+			dest_weight: Weight,
 			call: Vec<u8>,
-			dispatch_weight: XcmV2Weight,
+			dispatch_weight: Weight,
 			origin_kind: OriginKind,
 			with_appendix: Option<Vec<Instruction<()>>>,
 		) -> Result<Xcm<()>, DispatchError> {
@@ -958,7 +961,7 @@ pub mod pallet {
 				instructions.push(Self::appendix_instruction(appendix)?);
 			}
 			instructions.push(Transact {
-				origin_type: origin_kind,
+				origin_kind: origin_kind,
 				require_weight_at_most: dispatch_weight,
 				call: call.into(),
 			});
@@ -969,9 +972,9 @@ pub mod pallet {
 		fn buy_execution(
 			asset: MultiAsset,
 			at: &MultiLocation,
-			weight: u64,
+			weight: Weight,
 		) -> Result<Instruction<()>, DispatchError> {
-			let ancestry = T::LocationInverter::ancestry();
+			let ancestry = T::LocationInverter::invert_target();
 			let fees = asset
 				.reanchored(at, &ancestry)
 				.map_err(|_| Error::<T>::CannotReanchor)?;
@@ -987,7 +990,7 @@ pub mod pallet {
 			asset: MultiAsset,
 			at: &MultiLocation,
 		) -> Result<Instruction<()>, DispatchError> {
-			let ancestry = T::LocationInverter::ancestry();
+			let ancestry = T::LocationInverter::invert_target();
 			let fees = asset
 				.reanchored(at, &ancestry)
 				.map_err(|_| Error::<T>::CannotReanchor)?;
@@ -1000,7 +1003,7 @@ pub mod pallet {
 			mut beneficiary: MultiLocation,
 			at: &MultiLocation,
 		) -> Result<Instruction<()>, DispatchError> {
-			let ancestry = T::LocationInverter::ancestry();
+			let ancestry = T::LocationInverter::invert_target();
 			beneficiary
 				.reanchor(at, &ancestry)
 				.map_err(|_| Error::<T>::CannotReanchor)?;
