@@ -436,7 +436,7 @@ pub mod pallet {
 		/// to be a reserve asset for the destination transactor::multilocation.
 		#[pallet::call_index(2)]
 		#[pallet::weight(
-			Weight::from_ref_time(Pallet::<T>::weight_of_initiate_reserve_withdraw())
+			Pallet::<T>::weight_of_initiate_reserve_withdraw()
 			.saturating_add(T::WeightInfo::transact_through_derivative())
 		)]
 		pub fn transact_through_derivative(
@@ -520,7 +520,7 @@ pub mod pallet {
 		/// SovereignAccountDispatcherOrigin callable only
 		#[pallet::call_index(3)]
 		#[pallet::weight(
-			Weight::from_ref_time(Pallet::<T>::weight_of_initiate_reserve_withdraw())
+			Pallet::<T>::weight_of_initiate_reserve_withdraw()
 			.saturating_add(T::WeightInfo::transact_through_sovereign())
 		)]
 		pub fn transact_through_sovereign(
