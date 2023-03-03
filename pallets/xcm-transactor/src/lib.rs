@@ -1073,7 +1073,7 @@ pub mod pallet {
 				},
 			]);
 			T::Weigher::weight(&mut xcm.into()).map_or(Weight::MAX, |w| {
-				T::BaseXcmWeight::get().saturating_add(w.ref_time())
+				T::BaseXcmWeight::get().saturating_add(w)
 			})
 		}
 
