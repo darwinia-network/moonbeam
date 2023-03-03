@@ -165,7 +165,7 @@ pub mod pallet {
 		/// The actual weight for an XCM message is `T::BaseXcmWeight +
 		/// T::Weigher::weight(&msg)`.
 		#[pallet::constant]
-		type BaseXcmWeight: Get<XcmV2Weight>;
+		type BaseXcmWeight: Get<Weight>;
 
 		/// The way to retrieve the reserve of a MultiAsset. This can be
 		/// configured to accept absolute or relative paths for self tokens
@@ -1072,7 +1072,7 @@ pub mod pallet {
 					xcm: Xcm(vec![]),
 				},
 			]);
-			T::Weigher::weight(&mut xcm.into()).map_or(XcmV2Weight::max_value(), |w| {
+			T::Weigher::weight(&mut xcm.into()).map_or(Weight::MAX, |w| {
 				T::BaseXcmWeight::get().saturating_add(w.ref_time())
 			})
 		}
