@@ -1052,7 +1052,7 @@ pub mod pallet {
 		}
 
 		/// Returns weight of `weight_of_initiate_reserve_withdraw` call.
-		fn weight_of_initiate_reserve_withdraw() -> XcmV2Weight {
+		fn weight_of_initiate_reserve_withdraw() -> Weight {
 			let dest = MultiLocation::parent();
 
 			// We can use whatever asset here
