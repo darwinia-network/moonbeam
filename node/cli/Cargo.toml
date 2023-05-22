@@ -16,7 +16,7 @@ moonbeam-service = { workspace = true }
 # Substrate
 frame-benchmarking-cli = { workspace = true }
 sc-cli = { workspace = true }
-sc-finality-grandpa = { workspace = true }
+# sc-finality-grandpa = { workspace = true }
 sc-service = { workspace = true }
 sc-sysinfo = { workspace = true }
 sc-telemetry = { workspace = true }

@@ -62,7 +62,7 @@ sc-client-db = { workspace = true }
 sc-consensus = { workspace = true }
 sc-consensus-manual-seal = { workspace = true }
 sc-executor = { workspace = true }
-sc-finality-grandpa = { workspace = true }
+# sc-finality-grandpa = { workspace = true }
 sc-informant = { workspace = true }
 sc-network = { workspace = true }
 sc-network-common = { workspace = true }

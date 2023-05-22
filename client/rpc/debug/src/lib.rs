@@ -13,7 +13,7 @@
 
 // You should have received a copy of the GNU General Public License
 // along with Moonbeam.  If not, see <http://www.gnu.org/licenses/>.
-use futures::{SinkExt, StreamExt};
+use futures::StreamExt;
 use jsonrpsee::core::{async_trait, RpcResult};
 pub use moonbeam_rpc_core_debug::{DebugServer, TraceParams};
 
@@ -71,13 +71,12 @@ impl DebugServer for Debug {
 		transaction_hash: H256,
 		params: Option<TraceParams>,
 	) -> RpcResult<single::TransactionTrace> {
-		let mut requester = self.requester.clone();
+		let requester = self.requester.clone();
 
 		let (tx, rx) = oneshot::channel();
 		// Send a message from the rpc handler to the service level task.
 		requester
-			.send(((RequesterInput::Transaction(transaction_hash), params), tx))
-			.await
+			.unbounded_send(((RequesterInput::Transaction(transaction_hash), params), tx))
 			.map_err(|err| {
 				internal_err(format!(
 					"failed to send request to debug service : {:?}",
@@ -99,13 +98,12 @@ impl DebugServer for Debug {
 		id: RequestBlockId,
 		params: Option<TraceParams>,
 	) -> RpcResult<Vec<single::TransactionTrace>> {
-		let mut requester = self.requester.clone();
+		let requester = self.requester.clone();
 
 		let (tx, rx) = oneshot::channel();
 		// Send a message from the rpc handler to the service level task.
 		requester
-			.send(((RequesterInput::Block(id), params), tx))
-			.await
+			.unbounded_send(((RequesterInput::Block(id), params), tx))
 			.map_err(|err| {
 				internal_err(format!(
 					"failed to send request to debug service : {:?}",
@@ -308,7 +306,7 @@ where
 					frontier_backend.as_ref(),
 					eth_hash,
 				) {
-					Ok(Some(id)) => Ok(id),
+					Ok(Some(hash)) => Ok(BlockId::Hash(hash)),
 					Ok(_) => Err(internal_err("Block hash not found".to_string())),
 					Err(e) => Err(e),
 				}
@@ -329,18 +327,15 @@ where
 		};
 
 		// Get parent blockid.
-		let parent_block_id = BlockId::Hash(*header.parent_hash());
+		let parent_block_hash = *header.parent_hash();
 
-		let schema = frontier_backend_client::onchain_storage_schema::<B, C, BE>(
-			client.as_ref(),
-			reference_id,
-		);
+		let schema = fc_storage::onchain_storage_schema::<B, C, BE>(client.as_ref(), hash);
 
 		// Using storage overrides we align with `:ethereum_schema` which will result in proper
 		// SCALE decoding in case of migration.
 		let statuses = match overrides.schemas.get(&schema) {
 			Some(schema) => schema
-				.current_transaction_statuses(&reference_id)
+				.current_transaction_statuses(hash)
 				.unwrap_or_default(),
 			_ => {
 				return Err(internal_err(format!(
@@ -366,11 +361,11 @@ where
 
 		// Trace the block.
 		let f = || -> RpcResult<_> {
-			api.initialize_block(&parent_block_id, &header)
+			api.initialize_block(parent_block_hash, &header)
 				.map_err(|e| internal_err(format!("Runtime api access error: {:?}", e)))?;
 
 			let _result = api
-				.trace_block(&parent_block_id, exts, eth_tx_hashes)
+				.trace_block(parent_block_hash, exts, eth_tx_hashes)
 				.map_err(|e| {
 					internal_err(format!(
 						"Blockchain error when replaying block {} : {:?}",
@@ -446,7 +441,7 @@ where
 			frontier_backend.as_ref(),
 			hash,
 		) {
-			Ok(Some(hash)) => hash,
+			Ok(Some(hash)) => BlockId::Hash(hash),
 			Ok(_) => return Err(internal_err("Block hash not found".to_string())),
 			Err(e) => return Err(e),
 		};
@@ -463,7 +458,7 @@ where
 			_ => return Err(internal_err("Block header not found")),
 		};
 		// Get parent blockid.
-		let parent_block_id = BlockId::Hash(*header.parent_hash());
+		let parent_block_hash = *header.parent_hash();
 
 		// Get block extrinsics.
 		let exts = blockchain
@@ -473,7 +468,7 @@ where
 
 		// Get DebugRuntimeApi version
 		let trace_api_version = if let Ok(Some(api_version)) =
-			api.api_version::<dyn DebugRuntimeApi<B>>(&parent_block_id)
+			api.api_version::<dyn DebugRuntimeApi<B>>(parent_block_hash)
 		{
 			api_version
 		} else {
@@ -482,19 +477,17 @@ where
 			));
 		};
 
-		let schema = frontier_backend_client::onchain_storage_schema::<B, C, BE>(
-			client.as_ref(),
-			reference_id,
-		);
+		let schema =
+			fc_storage::onchain_storage_schema::<B, C, BE>(client.as_ref(), reference_hash);
 
 		// Get the block that contains the requested transaction. Using storage overrides we align
 		// with `:ethereum_schema` which will result in proper SCALE decoding in case of migration.
 		let reference_block = match overrides.schemas.get(&schema) {
-			Some(schema) => schema.current_block(&reference_id),
+			Some(schema) => schema.current_block(reference_hash),
 			_ => {
 				return Err(internal_err(format!(
 					"No storage override at {:?}",
-					reference_id
+					reference_hash
 				)))
 			}
 		};
@@ -504,12 +497,12 @@ where
 			let transactions = block.transactions;
 			if let Some(transaction) = transactions.get(index) {
 				let f = || -> RpcResult<_> {
-					api.initialize_block(&parent_block_id, &header)
+					api.initialize_block(parent_block_hash, &header)
 						.map_err(|e| internal_err(format!("Runtime api access error: {:?}", e)))?;
 
 					if trace_api_version >= 4 {
 						let _result = api
-							.trace_transaction(&parent_block_id, exts, &transaction)
+							.trace_transaction(parent_block_hash, exts, &transaction)
 							.map_err(|e| {
 								internal_err(format!(
 									"Runtime api access error (version {:?}): {:?}",
@@ -523,7 +516,7 @@ where
 							ethereum::TransactionV2::Legacy(tx) =>
 							{
 								#[allow(deprecated)]
-								api.trace_transaction_before_version_4(&parent_block_id, exts, &tx)
+								api.trace_transaction_before_version_4(parent_block_hash, exts, &tx)
 									.map_err(|e| {
 										internal_err(format!(
 											"Runtime api access error (legacy): {:?}",
