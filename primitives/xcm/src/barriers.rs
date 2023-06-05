@@ -14,11 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moonbeam.  If not, see <http://www.gnu.org/licenses/>.
 
-use frame_support::{
-	ensure,
-	pallet_prelude::Weight,
-	traits::{Contains, ProcessMessageError},
-};
+use frame_support::{ensure, pallet_prelude::Weight, traits::Contains};
 /// Allows execution from `origin` if it is contained in `T` (i.e. `T::Contains(origin)`) taking
 /// payments into account and if it starts with DescendOrigin.
 ///
@@ -40,27 +36,27 @@ impl<T: Contains<MultiLocation>> ShouldExecute for AllowTopLevelPaidExecutionDes
 		message: &mut [Instruction<Call>],
 		max_weight: Weight,
 		_weight_credit: &mut Weight,
-	) -> Result<(), ProcessMessageError> {
+	) -> Result<(), ()> {
 		log::trace!(
 			target: "xcm::barriers",
 			"AllowTopLevelPaidExecutionDescendOriginFirst origin:
 			{:?}, message: {:?}, max_weight: {:?}, weight_credit: {:?}",
 			origin, message, max_weight, _weight_credit,
 		);
-		ensure!(T::contains(origin), ProcessMessageError::Unsupported);
+		ensure!(T::contains(origin), ());
 		let mut iter = message.iter_mut();
 		// Make sure the first instruction is DescendOrigin
 		iter.next()
 			.filter(|instruction| matches!(instruction, DescendOrigin(_)))
-			.ok_or(ProcessMessageError::BadFormat)?;
+			.ok_or(())?;
 
 		// Then WithdrawAsset
 		iter.next()
 			.filter(|instruction| matches!(instruction, WithdrawAsset(_)))
-			.ok_or(ProcessMessageError::BadFormat)?;
+			.ok_or(())?;
 
 		// Then BuyExecution
-		let i = iter.next().ok_or(ProcessMessageError::BadFormat)?;
+		let i = iter.next().ok_or(())?;
 		match i {
 			BuyExecution {
 				weight_limit: Limited(ref mut weight),
@@ -77,7 +73,7 @@ impl<T: Contains<MultiLocation>> ShouldExecute for AllowTopLevelPaidExecutionDes
 				*weight_limit = Limited(max_weight);
 				Ok(())
 			}
-			_ => Err(ProcessMessageError::Overweight(max_weight)),
+			_ => Err(()),
 		}
 	}
 }
