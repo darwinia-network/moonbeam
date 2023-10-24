@@ -115,9 +115,9 @@ pub type LocationToAccountId = (
 
 /// Wrapper type around `LocationToAccountId` to convert an `AccountId` to type `H160`.
 pub struct LocationToH160;
-impl xcm_executor::traits::Convert<MultiLocation, H160> for LocationToH160 {
+impl xcm_executor::traits::ConvertLocation<MultiLocation, H160> for LocationToH160 {
 	fn convert(location: MultiLocation) -> Result<H160, MultiLocation> {
-		<LocationToAccountId as xcm_executor::traits::Convert<MultiLocation, AccountId>>::convert(
+		<LocationToAccountId as xcm_executor::traits::ConvertLocation<MultiLocation, AccountId>>::convert(
 			location,
 		)
 		.map(Into::into)
@@ -501,7 +501,7 @@ pub struct CurrencyIdtoMultiLocation<AssetXConverter>(sp_std::marker::PhantomDat
 impl<AssetXConverter> sp_runtime::traits::Convert<CurrencyId, Option<MultiLocation>>
 	for CurrencyIdtoMultiLocation<AssetXConverter>
 where
-	AssetXConverter: xcm_executor::traits::Convert<MultiLocation, AssetId>,
+	AssetXConverter: xcm_executor::traits::ConvertLocation<MultiLocation, AssetId>,
 {
 	fn convert(currency: CurrencyId) -> Option<MultiLocation> {
 		match currency {
@@ -681,7 +681,7 @@ mod testing {
 	/// AssetManager::set_asset_type_asset_id() and should NOT be used in any production code.
 	impl From<MultiLocation> for CurrencyId {
 		fn from(location: MultiLocation) -> CurrencyId {
-			use xcm_executor::traits::Convert as XConvert;
+			use xcm_executor::traits::ConvertLocation as XConvert;
 			use xcm_primitives::AssetTypeGetter;
 
 			// If it does not exist, for benchmarking purposes, we create the association

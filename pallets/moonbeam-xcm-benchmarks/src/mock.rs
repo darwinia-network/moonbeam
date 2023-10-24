@@ -51,7 +51,7 @@ impl xcm_executor::traits::OnResponse for DevNull {
 }
 
 pub struct AccountIdConverter;
-impl xcm_executor::traits::Convert<MultiLocation, u64> for AccountIdConverter {
+impl xcm_executor::traits::ConvertLocation<MultiLocation, u64> for AccountIdConverter {
 	fn convert(ml: MultiLocation) -> Result<u64, MultiLocation> {
 		match ml {
 			MultiLocation {

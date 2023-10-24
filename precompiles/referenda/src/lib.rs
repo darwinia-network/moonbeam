@@ -43,7 +43,7 @@ type BalanceOf<Runtime> = <<Runtime as pallet_referenda::Config>::Currency as Cu
 >>::Balance;
 type TrackIdOf<Runtime> = <<Runtime as pallet_referenda::Config>::Tracks as TracksInfo<
 	BalanceOf<Runtime>,
-	<Runtime as frame_system::Config>::BlockNumber,
+	BlockNumberFor<Runtime>,
 >>::Id;
 type BoundedCallOf<Runtime> = Bounded<<Runtime as pallet_referenda::Config>::RuntimeCall>;
 

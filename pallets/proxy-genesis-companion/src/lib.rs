@@ -57,7 +57,7 @@ pub mod pallet {
 			T::AccountId,
 			T::AccountId,
 			<T as Config>::ProxyType,
-			T::BlockNumber,
+			BlockNumberFor<T>,
 		)>,
 	}
 

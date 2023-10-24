@@ -36,7 +36,7 @@ use xcm_builder::AllowUnpaidExecutionFrom;
 use xcm_builder::FixedWeightBounds;
 use xcm_builder::IsConcrete;
 use xcm_builder::SovereignSignedViaLocation;
-use xcm_executor::traits::Convert;
+use xcm_executor::traits::ConvertLocation;
 use xcm_executor::{
 	traits::{TransactAsset, WeightTrader},
 	Assets,
@@ -100,8 +100,8 @@ where
 }
 
 pub struct MockParentMultilocationToAccountConverter;
-impl Convert<MultiLocation, AccountId> for MockParentMultilocationToAccountConverter {
-	fn convert_ref(location: impl Borrow<MultiLocation>) -> Result<AccountId, ()> {
+impl MaybeEquivalence<MultiLocation, AccountId> for MockParentMultilocationToAccountConverter {
+	fn convert(location: impl Borrow<MultiLocation>) -> Result<AccountId, ()> {
 		match location.borrow() {
 			MultiLocation {
 				parents: 1,
@@ -111,7 +111,7 @@ impl Convert<MultiLocation, AccountId> for MockParentMultilocationToAccountConve
 		}
 	}
 
-	fn reverse_ref(who: impl Borrow<AccountId>) -> Result<MultiLocation, ()> {
+	fn convert_back(who: impl Borrow<AccountId>) -> Result<MultiLocation, ()> {
 		match who.borrow() {
 			a if a == &AccountId::from(ParentAccount) => Ok(MultiLocation::parent()),
 			_ => Err(()),
@@ -120,8 +120,8 @@ impl Convert<MultiLocation, AccountId> for MockParentMultilocationToAccountConve
 }
 
 pub struct MockParachainMultilocationToAccountConverter;
-impl Convert<MultiLocation, AccountId> for MockParachainMultilocationToAccountConverter {
-	fn convert_ref(location: impl Borrow<MultiLocation>) -> Result<AccountId, ()> {
+impl MaybeEquivalence<MultiLocation, AccountId> for MockParachainMultilocationToAccountConverter {
+	fn convert(location: impl Borrow<MultiLocation>) -> Result<AccountId, ()> {
 		match location.borrow() {
 			MultiLocation {
 				parents: 1,
@@ -131,7 +131,7 @@ impl Convert<MultiLocation, AccountId> for MockParachainMultilocationToAccountCo
 		}
 	}
 
-	fn reverse_ref(who: impl Borrow<AccountId>) -> Result<MultiLocation, ()> {
+	fn convert_back(who: impl Borrow<AccountId>) -> Result<MultiLocation, ()> {
 		match who.borrow() {
 			a if a.has_prefix_u32(0xffffffff) => Ok(MultiLocation {
 				parents: 1,

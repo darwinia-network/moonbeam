@@ -19,6 +19,7 @@
 use fp_evm::PrecompileHandle;
 use frame_support::dispatch::{Dispatchable, GetDispatchInfo, PostDispatchInfo};
 use frame_support::traits::{Currency, Polling};
+use frame_system::pallet_prelude::BlockNumberFor;
 use pallet_conviction_voting::Call as ConvictionVotingCall;
 use pallet_conviction_voting::{
 	AccountVote, Casting, ClassLocksFor, Conviction, Delegating, Tally, TallyOf, Vote, Voting,
@@ -58,7 +59,7 @@ type ClassOf<Runtime> = <<Runtime as pallet_conviction_voting::Config>::Polls as
 type VotingOf<Runtime> = Voting<
 	BalanceOf<Runtime>,
 	<Runtime as frame_system::Config>::AccountId,
-	<Runtime as frame_system::Config>::BlockNumber,
+	BlockNumberFor<Runtime>,
 	<<Runtime as pallet_conviction_voting::Config>::Polls as Polling<TallyOf<Runtime>>>::Index,
 	<Runtime as pallet_conviction_voting::Config>::MaxVotes,
 >;
