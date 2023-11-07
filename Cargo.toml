@@ -92,7 +92,7 @@ pallet-moonbeam-orbiters                = { path = "pallets/moonbeam-orbiters", 
 pallet-parachain-staking                = { path = "pallets/parachain-staking", default-features = false }
 pallet-proxy-genesis-companion          = { path = "pallets/proxy-genesis-companion", default-features = false }
 pallet-xcm-transactor                   = { path = "pallets/xcm-transactor", default-features = false }
-precompile-utils                        = { path = "/home/bear/coding/rust-space/frontier/precompiles", default-features = false }
+precompile-utils                        = { git = "https://github.com/paritytech/frontier", branch = "polkadot-v1.1.0", default-features = false }
 xcm-primitives                          = { path = "primitives/xcm", default-features = false }
 
 pallet-crowdloan-rewards = { git = "https://github.com/moonbeam-foundation/crowdloan-rewards", branch = "moonbeam-polkadot-v1.1.0", default-features = false }

@@ -377,11 +377,7 @@ where
 			balance: amount,
 		};
 
-		RuntimeHelper::<Runtime>::try_dispatch(
-			handle,
-			Some(origin).into(),
-			call
-		)?;
+		RuntimeHelper::<Runtime>::try_dispatch(handle, Some(origin).into(), call)?;
 
 		event.record(handle)?;
 
