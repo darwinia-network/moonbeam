@@ -92,7 +92,7 @@ pallet-moonbeam-orbiters                = { path = "pallets/moonbeam-orbiters", 
 pallet-parachain-staking                = { path = "pallets/parachain-staking", default-features = false }
 pallet-proxy-genesis-companion          = { path = "pallets/proxy-genesis-companion", default-features = false }
 pallet-xcm-transactor                   = { path = "pallets/xcm-transactor", default-features = false }
-precompile-utils                        = { path = "precompiles/utils", default-features = false }
+precompile-utils                        = { git = "https://github.com/paritytech/frontier", branch = "polkadot-v1.1.0", default-features = false }
 xcm-primitives                          = { path = "primitives/xcm", default-features = false }
 
 pallet-crowdloan-rewards = { git = "https://github.com/moonbeam-foundation/crowdloan-rewards", branch = "moonbeam-polkadot-v1.1.0", default-features = false }
@@ -246,6 +246,7 @@ pallet-evm-precompile-simple = { git = "https://github.com/paritytech/frontier",
 # Frontier (client)
 fc-consensus = { git = "https://github.com/paritytech/frontier", branch = "polkadot-v1.1.0" }
 fc-db = { git = "https://github.com/paritytech/frontier", branch = "polkadot-v1.1.0" }
+fc-api = { git = "https://github.com/paritytech/frontier", branch = "polkadot-v1.1.0" }
 fc-mapping-sync = { git = "https://github.com/paritytech/frontier", branch = "polkadot-v1.1.0" }
 fc-rpc = { git = "https://github.com/paritytech/frontier", branch = "polkadot-v1.1.0", features = [
 	"rpc-binary-search-estimate",
