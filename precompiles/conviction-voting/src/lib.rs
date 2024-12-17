@@ -382,7 +382,6 @@ where
 			handle,
 			Some(origin).into(),
 			call,
-			SYSTEM_ACCOUNT_SIZE,
 		)?;
 
 		event.record(handle)?;
